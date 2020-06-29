@@ -10,7 +10,12 @@ html {
 
 body {
   margin: 0;
+  background-image:url("/images/background_tropical1.jpg");
+  background-size: cover;
+  height: 100vh;
+  /* vh is there so the size of the app is the same than the window/body size */
 }
+
 
 .slide-in-left-enter {
   transform: translateX(-100%);
