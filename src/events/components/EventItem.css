@@ -48,6 +48,13 @@
     margin: 0.5rem;
   }
   
+  /* map size */
+  .map-container {
+    height: 11rem;
+    width: 100%;
+  }
+  
+
   @media (min-width: 768px) {
     .event-item__image {
       height: 20rem;

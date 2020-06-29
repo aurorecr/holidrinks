@@ -8,16 +8,17 @@ import './Modal.css';
 
 
 const ModalOverlay = props => {
-    const content = (
-<div className={`modal ${props.className}`} style={props.style}>
-    <header className={`modal__header ${props.headerClass}`}>
+  const content = (
+    <div className={`modal ${props.className}`} style={props.style}>
+      <header className={`modal__header ${props.headerClass}`}>
         {/* with ${props... > so by using the modal, I can also add my classes to the modal  */}
         <h2>{props.header}</h2>
-    </header>
+      </header>
 
      <form onSubmit={ props.onSubmit ? props.onSubmit : event => event.preventDefault()}>
      {/* in case this form give the possibility to add content that is automatically wrapped in it */}
      {/* if I render any buttons inside of that form it will not reload the page when I submit */}
+     {/* preventDefault: here stop the page to refresh when I close the Map */}
       <div className={`modal__content ${props.contentClass}`}>
         {props.children}
       </div>
@@ -29,7 +30,7 @@ const ModalOverlay = props => {
     </form>
   </div>
 );
- return ReactDOM.createPortal( document.getElementById('modal-hook'));
+  return ReactDOM.createPortal(content, document.getElementById('modal-hook'));
 };
 //Portals provide a way to render children into a DOM node that exists outside the hierarchy of the DOM component. Added in index.html
 
@@ -40,7 +41,7 @@ const Modal = props => {
       {props.show && <Backdrop onClick={props.onCancel} />}
       {/* if there is a show prop it will render the backdrop and
         on the backdrop, we can click and I will not trigger an on cancel method or function which I receive on */}
-      <CSSTransition
+       <CSSTransition
         in={props.show}
         mountOnEnter
         unmountOnExit

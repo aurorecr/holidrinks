@@ -9,10 +9,10 @@ const example_events =[
     title:'Basement Theatre',
     description: 'Here since 2 days, mood to visit a bit the city white other buddies',
     imageUrl:'https://bit.ly/3ikLMau',
-    address:'Lower Greys Avenue, Auckland CBD, Auckland 1010, New Zealand',
+    address:'Lower Greys Avenue,Auckland, New Zealand',
     location:{
-        lat:40.7484405,
-        lng:-73.9856644,
+        lat:-36.853539,
+        lng:174.762792,
     },
     creator:'Julia'
 },
@@ -21,7 +21,7 @@ const example_events =[
     title:'The Glass Goose',
     description: 'Want to form a groupe for Hiking',
     imageUrl:'https://bit.ly/38ddKA0',
-    address:'28 Federal Street, Auckland CBD,',
+    address:'28 Federal Street, Auckland,New Zealand',
     location:{
         lat:-36.848613,
         lng:174.7627371,

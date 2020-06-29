@@ -1,8 +1,14 @@
 import React from 'react';
 
-const NewEvent = () => {
-    return <h2>New Holidrinks here soon!</h2>;
+// import Input from '../../shared/components/FormElements/Input';
+import './NewEvent.css';
 
-}
+const NewEvent = () => {
+  return (
+    <form className="event-form">
+      {/* <Input element="input" type="text" label="Title" /> */}
+    </form>
+  );
+};
 
 export default NewEvent;

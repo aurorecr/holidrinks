@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+
 import Modal from '../../shared/components/UIElements/Modal';
 import Button from '../../shared/components/FormElements/Button'
 import Card from '../../shared/components/UIElements/Card';
+import Map from '../../shared/components/UIElements/Map';
 
 import './EventItem.css'
 
@@ -24,10 +26,10 @@ const EventItem = props => {
           header={props.address}
           contentClass="place-item__modal-content"
           footerClass="place-item__modal-actions"
-          footer={<Button onClick={closeMapHandler}>Close</Button>}
-        >
+          footer={<Button onClick={closeMapHandler}>Close</Button>}>
+            {/* button to close the modal */}
           <div className="map-container">
-            <h2>Map</h2>
+            <Map center={props.coordinates} zoom={16}/>
           </div>
         </Modal>
     <li className="event-item">
@@ -41,7 +43,8 @@ const EventItem = props => {
             <p>{props.description}</p>
         </div>
         <div className="event-item__actions">
-            <Button inverse>View on map</Button>
+            <Button inverse onClick={openMapHandler}>View on map</Button>
+            {/* openMapHandler > open the map when click on it, reaching the function at the top: "setShowMap(true)"*/}
             <Button to={'/event/${props.id}'}>Edit</Button>
             {/* here the 'id' of that event */}
             <Button danger>Delete</Button>
