@@ -10,6 +10,7 @@ const Input = props => {
     ) : (
         // if it doesn't recieved an input element it will load:
       <textarea id={props.id} rows={props.rows || 3} />
+    //   we set to 3, in case the rows property is not define
     );
 
   return (

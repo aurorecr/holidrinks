@@ -19,7 +19,7 @@ const Map = props => {
       //no need to write : props.center etc.. as it's destructured and stored in the previous constance {center,zoom}
     });
   
-    new window.google.maps.Marker({ position: props.center, map: map });
+    new window.google.maps.Marker({ position:center, map: map });
     //here I render the market, it's the localisation on the map of the place matching with the address so the red drop icone,this will show the marker in the center of the map
   }, [center, zoom]);  
 
