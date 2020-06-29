@@ -6,7 +6,13 @@ import './NewEvent.css';
 const NewEvent = () => {
   return (
     <form className="event-form">
-      <Input element="input" type="text" label="Title" />
+      <Input
+        element="input"
+        type="text"
+        label="Title"
+        validators={[]}
+        errorText="Please enter a valid title."
+      />
     </form>
   );
 };
