@@ -24,8 +24,8 @@ const EventItem = props => {
           onCancel={closeMapHandler}
         //The cxl handler here is in the end of the function triggered in the backdrop in Modal.js when I click on {props.onCancel}
           header={props.address}
-          contentClass="place-item__modal-content"
-          footerClass="place-item__modal-actions"
+          contentClass="event-item__modal-content"
+          footerClass="event-item__modal-actions"
           footer={<Button onClick={closeMapHandler}>Close</Button>}>
             {/* button to close the modal */}
           <div className="map-container">

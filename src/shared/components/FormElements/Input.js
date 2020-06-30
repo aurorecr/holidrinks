@@ -45,8 +45,8 @@ const Input = props => {
     const {id, onInput}= props;
     const {value, isValid}= inputState;
 
-    useEffect(() => 
-    {onInput (id,value, isValid)},
+    useEffect(() => {
+      onInput (id,value, isValid)},
     // here I destructure juste above in const {id...  and const {value...So no need to write "props"on this line
     //whenever the function "onInput" change or the "id", or the "value", it will call the "onInput" props from the const, just above
     [id,value, isValid, onInput]);
@@ -60,10 +60,9 @@ const Input = props => {
         //"target.value", value here is the value enter by the user
         //the all sentence is updating the state
         //validators is passed to the imput component wich is in the "const NewEvent" in component NewEvent.js
-    
       };
 
-      const touchHandler=()=> {
+      const touchHandler = () => {
      dispatch({
        type: 'TOUCH'
         }); 
@@ -85,11 +84,12 @@ const Input = props => {
           />
         ) : (
           <textarea
-            id={props.id}
-            rows={props.rows || 3}
-            onChange={changeHandler}
-            value={inputState.value}
-          />
+          id={props.id}
+          rows={props.rows || 3}
+          onChange={changeHandler}
+          onBlur={touchHandler}
+          value={inputState.value}
+      />
         );
 
   return (
@@ -98,10 +98,10 @@ const Input = props => {
         'form-control--invalid'}`}>
         {/* this class 'form-control--invalid' will be applied to this div if our input state is invalid, as it is initialy.It will be valid only after the user enter some characters*/}
         {/* It will be valid only as well id "isTouched" is true */}
-      <label htmlFor={props.id}>{props.label}</label>
+       <label htmlFor={props.id}>{props.label}</label>
         {/* htmlFor is the same "for" as the one in JS, for form */}
       {element}
-      {!inputState.isValid && inputState.isTouched&& <p>{props.errorText}</p>}
+      {!inputState.isValid && inputState.isTouched && <p>{props.errorText}</p>}
       {/* if the input is invalid, here we render an error message, that will be set outside, so I use props */}
     </div>
   );
