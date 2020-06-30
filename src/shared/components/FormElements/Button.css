@@ -9,6 +9,8 @@
     margin-right: 1rem;
     text-decoration: none;
     display: inline-block;
+    font-family: 'Montserrat', sans-serif;
+
   }
   
   .button:focus {
