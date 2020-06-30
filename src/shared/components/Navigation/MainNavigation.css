@@ -48,6 +48,7 @@ h2, h1, li{
 h1{
   font-family: 'Montserrat', sans-serif;
   font-size: 20px;
+  text-shadow: 2px 2px 3px rgba(248, 129, 168, 0.8);
 }
 
 @media (min-width: 768px) {
@@ -57,9 +58,12 @@ h1{
 
   .main-navigation__header-nav {
     display: block;
+    /* mask-image: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #f05588 25%, #f05588 75%, rgba(248, 129, 168, 0.3) 100%); */
   }
 
   h1{ 
     font-size: 60px;
+    text-shadow: 2px 2px 3px rgba(248, 129, 168, 0.8);
+
   }
 }

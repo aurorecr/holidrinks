@@ -1,5 +1,6 @@
-import React, {useReducer}from 'react';
+import React, {useReducer, useEffect}from 'react';
 //Use reducer allows you to manage state in a component and give a function that can be call which updates the state and re-renders the component, can manage more complex state than with use state
+// useEffect allows to run some logic when the dependencies changes.It adds the ability to perform side effects from a function component. It serves the same purpose as componentDidMount, componentDidUpdate, and componentWillUnmount in React classes.
 
 import {validate} from '../util/validators';
 import './Input.css';
@@ -40,6 +41,16 @@ const Input = props => {
         isValid: false
         //here initialy the input will be treated as false
       });
+      
+    const {id, onInput}= props;
+    const {value, isValid}= inputState;
+
+    useEffect(() => 
+    {onInput (id,value, isValid)},
+    // here I destructure juste above in const {id...  and const {value...So no need to write "props"on this line
+    //whenever the function "onInput" change or the "id", or the "value", it will call the "onInput" props from the const, just above
+    [id,value, isValid, onInput]);
+    // in {} > is the function to be executed. In the [] is the array of dependencies
 
     const changeHandler = event => {
         //"event" is an object we get automatically on the change event in "onChange={changeHandler}" from textarea

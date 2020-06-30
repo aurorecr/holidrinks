@@ -2,7 +2,8 @@
   width: 100%;
   align-items: center;
   justify-content: center;
-  background-image: linear-gradient(to top, #bfe7f8 0%, #3498db 100%);
+  /* background-image: linear-gradient(to top, #bfe7f8 0%, #3498db 100%); */
+  background-color: rgba(251, 215, 227, 0.6);
   /* box-shadow: 0 2px 6px rgba(0, 0, 0, 0.26); */
   padding: 0 1rem;
   z-index: 5;
