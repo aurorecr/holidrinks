@@ -11,6 +11,8 @@
   .form-control label {
     font-weight: bold;
     margin-bottom: 0.5rem;
+    font-family: 'Lora', serif;
+    font-size: 17px;
   }
   
   .form-control input,

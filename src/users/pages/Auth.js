@@ -1,17 +1,21 @@
-import React from 'react';
-
+import React, { useState } from 'react';
+//useState is use to manage some state, here to manage the switch mode
 import Card from '../../shared/components/UIElements/Card';
 import Input from '../../shared/components/FormElements/Input';
 import Button from '../../shared/components/FormElements/Button';
 import {
   VALIDATOR_EMAIL,
-  VALIDATOR_MINLENGTH
+  VALIDATOR_MINLENGTH,
+  VALIDATOR_REQUIRE
 } from '../../shared/components/util/validators';
 import { useForm } from '../../shared/hooks/form.hook';
 import './Auth.css';
 
+
 const Auth = () => {
-  const [formState, inputHandler] = useForm(
+  const [isLoginMode, setIsLoginMode] = useState(true);
+
+  const [formState, inputHandler, setFormData] = useForm(
     {
       email: {
         value: '',
@@ -25,6 +29,34 @@ const Auth = () => {
     false
   );
 
+  const switchModeHandler = () => {
+    if (!isLoginMode) {
+      setFormData(
+        //to wired up correctly the switch mode I use setFormData, to correctly update the form date behind the scene
+        {
+          ...formState.inputs,
+          //here I copy all the fields and override with name to be undefined
+          name: undefined
+        },
+        formState.inputs.email.isValid && formState.inputs.password.isValid
+      );
+    } else {
+      //here the user is in the login mode but is executing the switch mode, so the user is movind to signup mode
+      setFormData(
+        {
+          ...formState.inputs,
+          name: {
+            value: '',
+            isValid: false
+          }
+        },
+        false
+      );
+    }
+    setIsLoginMode(prevMode => !prevMode);
+    //this part runs before the user switch the mode
+  };
+
   const authSubmitHandler = event => {
     event.preventDefault();
     console.log(formState.inputs);
@@ -32,9 +64,21 @@ const Auth = () => {
 
   return (
     <Card className="authentication">
-      <h2>Login Required</h2>
+      <h2>Login to your account</h2>
       <hr />
       <form onSubmit={authSubmitHandler}>
+        {!isLoginMode && (
+          //if we're not in login mode here it will render a new input empty to fill up
+          <Input
+            element="input"
+            id="name"
+            type="text"
+            label="Your Name"
+            validators={[VALIDATOR_REQUIRE()]}
+            errorText="Please enter your name."
+            onInput={inputHandler}
+          />
+        )}
         <Input
           element="input"
           id="email"
@@ -54,9 +98,12 @@ const Auth = () => {
           onInput={inputHandler}
         />
         <Button type="submit" disabled={!formState.isValid}>
-          Login
+          {isLoginMode ? 'LOGIN' : 'SIGNUP'}
         </Button>
       </form>
+      <Button inverse onClick={switchModeHandler}>
+        Go to {isLoginMode ? 'SIGNUP' : 'LOGIN'} instead
+      </Button>
     </Card>
   );
 };

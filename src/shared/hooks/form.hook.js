@@ -6,6 +6,10 @@ const formReducer = (state, action) => {
         let formIsValid = true;
         for (const inputId in state.inputs) {
           //thoses state are input property, so here I go through all the input stored there using for in loop as it's an object
+          if(!state.inputs[inputId]){
+            continue;
+            //continue
+          }
           if (inputId === action.inputId) {
             formIsValid = formIsValid && action.isValid;
             //formIsValid is the previous value that I combine with the new validity "action.isValid"

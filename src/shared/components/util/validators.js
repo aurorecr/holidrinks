@@ -7,7 +7,7 @@ const VALIDATOR_TYPE_MAX = 'MAX';
 const VALIDATOR_TYPE_EMAIL = 'EMAIL';
 const VALIDATOR_TYPE_FILE = 'FILE';
 
-// function return validator configuration object, where everyobject has a type and a val
+// function return validator configuration object, where everyobject has a type and a value
 export const VALIDATOR_REQUIRE = () => ({ type: VALIDATOR_TYPE_REQUIRE });
 //here I check if the input is not empty, as it's require
 export const VALIDATOR_FILE = () => ({ type: VALIDATOR_TYPE_FILE });

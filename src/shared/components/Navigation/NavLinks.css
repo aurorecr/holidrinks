@@ -108,8 +108,19 @@
       color: #292929; 
     }
 
-    h3, h2,p{
+    h3{
       font-family: 'Lora', serif;
+      font-size: 17px;
+    }
+
+     h2{
+      font-family: 'Lora', serif;
+      font-size: 20px;
+    }
+    
+    p{
+      font-family: 'Lora', serif;
+      font-size: 17px;
     }
   }
   
