@@ -1,41 +1,16 @@
-import React, {useCallback , useReducer} from 'react';
+import React from 'react';
 // If I setup two useState hooks & declare two functions to handle state changes when I invoke a function and re-render happens, a new instance of both of these functions will be created. The instance of the other function will also be created. So with several function  many instance will be created during each re-render and will causes performance issues like infinity loop. seCallback helps stop that. It will cache/memoized function we pass into it and stop a new instance to be created for the other function.
 import Input from '../../shared/components/FormElements/Input';
 import Button from '../../shared/components/FormElements/Button';
 import {VALIDATOR_REQUIRE, VALIDATOR_MINLENGTH} from '../../shared/components/util/validators';
+import { useForm } from '../../shared/hooks/form.hook';
 
-import './NewEvent.css';
-
-const formReducer = (state, action) => {
-  switch (action.type) {
-    case 'INPUT_CHANGE':
-      let formIsValid = true;
-      for (const inputId in state.inputs) {
-        //thoses state are input property, so here I go through all the input stored there using for in loop as it's an object
-        if (inputId === action.inputId) {
-          formIsValid = formIsValid && action.isValid;
-          //formIsValid is the previous value that I combine with the new validity "action.isValid"
-        } else {
-          formIsValid = formIsValid && state.inputs[inputId].isValid;
-        }
-      }
-      return {
-        ...state,
-        inputs: {
-          ...state.inputs,
-          [action.inputId]: { value: action.value, isValid: action.isValid }
-          // this update one of the field in the input "state.inputs"
-        },
-        isValid: formIsValid
-      };
-    default:
-      return state;
-  }
-};
+import './EventForm.css';
 
 const NewEvent = () => {
-  const [formState, dispatch] = useReducer(formReducer, {
-    inputs: {
+  
+  const [formState, inputHandler] = useForm(
+  {
       title: {
         value: '',
         isValid: false
@@ -43,28 +18,23 @@ const NewEvent = () => {
       description: {
         value: '',
         isValid: false
+      },
+      address: {
+        value: '',
+        isValid: false
       }
     },
-    isValid: false
-  });// this is the initial state that needs  to be update in the reducer
+     false
+  );// this is the initial state that needs  to be update in the reducer
 
-  const inputHandler = useCallback((id,value,isValid) => {
-  //this function will received the id of the input that changed, value and answer whether it's valid or not
-  dispatch({
-    type: 'INPUT_CHANGE',
-    value: value,
-    isValid: isValid,
-    inputId: id,
-   });
- }, []);
 
- const placeSubmitHandler = event => {
+ const eventSubmitHandler = event => {
   event.preventDefault();
   console.log(formState.inputs); // send this to the backend!
 };
 
   return (
-    <form className="event-form" onSubmit={placeSubmitHandler}>
+    <form className="event-form" onSubmit={eventSubmitHandler}>
       <Input
         id="title"
         element="input"

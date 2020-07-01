@@ -45,7 +45,7 @@ const EventItem = props => {
         <div className="event-item__actions">
             <Button inverse onClick={openMapHandler}>View on map</Button>
             {/* openMapHandler > open the map when click on it, reaching the function at the top: "setShowMap(true)"*/}
-            <Button to={`/event/${props.id}`}>Edit</Button>
+            <Button to={`/events/${props.id}`}>Edit</Button>
             {/* here the 'id' of that event */}
             <Button danger>Delete</Button>
         </div>

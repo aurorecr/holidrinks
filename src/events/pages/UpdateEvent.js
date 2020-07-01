@@ -1,57 +1,78 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
+import { withRouter } from "react-router";
 
 import Input from '../../shared/components/FormElements/Input';
 import Button from '../../shared/components/FormElements/Button';
 import {
   VALIDATOR_REQUIRE,
   VALIDATOR_MINLENGTH
-} from '../../shared/util/validators';
+} from '../../shared/components/util/validators';
+import {useForm} from '../../shared/hooks/form.hook';
+import './EventForm.css';
 
-const DUMMY_PLACES = [
-  {
-    id: 'p1',
-    title: 'Empire State Building',
-    description: 'One of the most famous sky scrapers in the world!',
-    imageUrl:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/NYC_Empire_State_Building.jpg/640px-NYC_Empire_State_Building.jpg',
-    address: '20 W 34th St, New York, NY 10001',
-    location: {
-      lat: 40.7484405,
-      lng: -73.9878584
+const EX_EVENTS = [
+    {
+        id:'p1',
+        title:'Basement Theatre',
+        description: 'Here since 2 days, mood to visit a bit the city white other buddies',
+        imageUrl:'https://bit.ly/3ikLMau',
+        address:'Lower Greys Avenue,Auckland, New Zealand',
+        location:{
+            lat:-36.853539,
+            lng:174.762792,
+        },
+        creator:'Julia'
     },
-    creator: 'u1'
-  },
-  {
-    id: 'p2',
-    title: 'Empire State Building',
-    description: 'One of the most famous sky scrapers in the world!',
-    imageUrl:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/NYC_Empire_State_Building.jpg/640px-NYC_Empire_State_Building.jpg',
-    address: '20 W 34th St, New York, NY 10001',
-    location: {
-      lat: 40.7484405,
-      lng: -73.9878584
+    {
+        id:'p2',
+        title:'The Glass Goose',
+        description: 'Want to form a groupe for Hiking',
+        imageUrl:'https://bit.ly/38ddKA0',
+        address:'28 Federal Street, Auckland,New Zealand',
+        location:{
+            lat:-36.848613,
+            lng:174.7627371,
+        },
+        creator:'u2'
     },
-    creator: 'u2'
-  }
 ];
 
-const UpdatePlace = () => {
-  const placeId = useParams().placeId;
+  const UpdateEvent = (props) => {
+  console.log(props,'props ?')
 
-  const identifiedPlace = DUMMY_PLACES.find(p => p.id === placeId);
+  const eventId=props.match.params.eventsId
 
-  if (!identifiedPlace) {
+  const identifiedEvent= EX_EVENTS.find(e => {
+    console.log(eventId,'eventId here?')
+    console.log(e.id,'e.id here?')
+
+    return e.id === eventId
+    
+  });
+  
+  const [formState, inputHandler] = useForm({
+    title:{
+      value: identifiedEvent.title,
+      isValid : true
+    },
+    description:{
+      value: identifiedEvent.description,
+      isValid : true
+    },
+  },true)
+  
+
+  if (!identifiedEvent) {
     return (
       <div className="center">
-        <h2>Could not find place!</h2>
+        <h2>Could not find this event!</h2>
       </div>
     );
   }
 
   return (
-    <form>
+    <form className="event-form">
       <Input
         id="title"
         element="input"
@@ -59,9 +80,9 @@ const UpdatePlace = () => {
         label="Title"
         validators={[VALIDATOR_REQUIRE()]}
         errorText="Please enter a valid title."
-        onInput={() => {}}
-        value={identifiedPlace.title}
-        valid={true}
+        onInput={inputHandler}
+        initialValue={formState.inputs.title.value}
+        initialValid={formState.inputs.title.isValid}
       />
       <Input
         id="description"
@@ -69,15 +90,17 @@ const UpdatePlace = () => {
         label="Description"
         validators={[VALIDATOR_MINLENGTH(5)]}
         errorText="Please enter a valid description (min. 5 characters)."
-        onInput={() => {}}
-        value={identifiedPlace.description}
-        valid={true}
-      />
-      <Button type="submit" disabled={true}>
-        UPDATE PLACE
+        onInput={inputHandler}
+        initialValue={formState.inputs.description.value}
+        initialValid={formState.inputs.description.isValid}
+         />
+
+      <Button type="submit" disabled={!formState.isValid}>
+        {/* if the form is not valid then the button is disabled */}
+        Update Holidrink
       </Button>
     </form>
   );
 };
 
-export default UpdatePlace;
+export default withRouter(UpdateEvent);

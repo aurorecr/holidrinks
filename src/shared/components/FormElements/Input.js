@@ -35,10 +35,11 @@ const Input = props => {
     const [inputState, dispatch] = useReducer(inputReducer, {
         //I destructure here stored in constants, 1st the current state and 2nd the dispatch function to be call
         //So I can dispatch actions to the reducer function which will run through the funtion and return a new state wich will update "inputState" and re-render the component in the end
-        value: '',
+        value:props.initialValue || '',
+        //if the value is provided or if the value is not it's empty string
         isTouched:false,
         //initial state of "isTouched"
-        isValid: false
+        isValid:props.initialValid || false
         //here initialy the input will be treated as false
       });
       
