@@ -5,6 +5,7 @@ import Users from './users/pages/Users';
 import NewEvent from './events/pages/NewEvent';
 import UserEvents from './events/pages/UserEvents';
 import UpdateEvent from './events/pages/UpdateEvent';
+import Auth from './users/pages/Auth';
 import MainNavigation from './shared/components/Navigation/MainNavigation';
 
 const App = () => { 
@@ -26,6 +27,9 @@ const App = () => {
       <Route path="/events/:eventsId">
        {/* this has to be place after event/new, the order matters here,as it need to enter in event/new before. */}
         <UpdateEvent /> 
+      </Route>
+      <Route path="/auth">
+        <Auth/> 
       </Route>
         <Redirect to="/" /> {/*If what is incorrect after this slash then it will redirect to / nothing after */}
     </Switch>

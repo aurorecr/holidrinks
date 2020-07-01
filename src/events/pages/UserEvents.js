@@ -3,6 +3,7 @@ import {useParams} from 'react-router-dom';
 // to find place by id I use> useParams
 import EventList from '../components/EventList';
 
+
 const example_events =[
 {
     id:'p1',

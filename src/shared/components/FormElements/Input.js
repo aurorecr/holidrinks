@@ -43,19 +43,23 @@ const Input = props => {
         //here initialy the input will be treated as false
       });
       
-    const {id, onInput}= props;
-    const {value, isValid}= inputState;
+    const {id, onInput} = props;
+    const {value, isValid} = inputState;
 
     useEffect(() => {
-      onInput (id,value, isValid)},
+      onInput (id,value, isValid)
     // here I destructure juste above in const {id...  and const {value...So no need to write "props"on this line
     //whenever the function "onInput" change or the "id", or the "value", it will call the "onInput" props from the const, just above
-    [id,value, isValid, onInput]);
+  },[id,value, isValid, onInput]);
     // in {} > is the function to be executed. In the [] is the array of dependencies
 
     const changeHandler = event => {
         //"event" is an object we get automatically on the change event in "onChange={changeHandler}" from textarea
-        dispatch({ type: 'CHANGE', val: event.target.value, validators :props.validators });
+        dispatch({ 
+          type: 'CHANGE',
+          val: event.target.value,
+          validators :props.validators 
+        });
         //i want to dispatch to this reducer, the identified has to be the same that in "case" in the swith methode, so it's CHANGE, now
         //"target" is the input element on which this event was triggered 
         //"target.value", value here is the value enter by the user

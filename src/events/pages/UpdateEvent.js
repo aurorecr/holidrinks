@@ -3,6 +3,7 @@ import React, {useEffect, useState} from 'react';
 // to avoid infinit loop in "setFormData" because it will set a new form instead of updating, I use "useEffect" hook to wrap the call  setFormData inside
 import { withRouter } from "react-router";
 
+import Card from '../../shared/components/FormElements/Input';
 import Input from '../../shared/components/FormElements/Input';
 import Button from '../../shared/components/FormElements/Button';
 import {
@@ -66,7 +67,9 @@ const UpdateEvent = (props) => {
   
   useEffect(() =>{
     // so inside I put my function setFormData as useEffect will stop the loop
-  setFormData({
+    if (identifiedEvent){
+  setFormData(
+    {
     title:{
       value: identifiedEvent.title,
       isValid : true
@@ -74,13 +77,15 @@ const UpdateEvent = (props) => {
     description:{
       value: identifiedEvent.title,
       isValid : true
+    }
     },
-  },true
+   true
   );
+  }
+
   setIsLoading(false);
   //once we set the form data it's not loading anymore
 },[setFormData, identifiedEvent]);
-
   
   const eventUpdateSubmitHandler = event => {
     event.preventDefault();
@@ -89,7 +94,9 @@ const UpdateEvent = (props) => {
   if (!identifiedEvent) {
     return (
       <div className="center">
+        <Card>
         <h2>Could not find this event!</h2>
+        </Card>
       </div>
     );
   }

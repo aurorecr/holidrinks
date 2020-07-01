@@ -11,10 +11,26 @@ const EventItem = props => {
     const [showMap, setShowMap] = useState(false);
     //showMap is initialy false so we don't show the model yet
 
+    const[showConfirmModal, setShowConfirmModal] = useState(false);
+
     const openMapHandler = () => setShowMap(true);
     //open the map
     const closeMapHandler = () => setShowMap(false);
     //close the map
+
+    const showDeleteWarningHandler = () => {
+      setShowConfirmModal(true);
+    };
+    
+    const cancelDeleteHandler = () => {
+      setShowConfirmModal(false);
+    };
+
+    const confirmDeleteHandler = () => {
+      setShowConfirmModal(false);
+        console.log('DELETING');
+    };
+
 
     return (
     <React.Fragment>
@@ -32,6 +48,21 @@ const EventItem = props => {
             <Map center={props.coordinates} zoom={16}/>
           </div>
         </Modal>
+
+        <Modal 
+        show={showConfirmModal}
+        onCancel={cancelDeleteHandler}
+        header="Are you sure?" 
+        footerClass="event-item__modal-actions" 
+        footer={
+          <React.Fragment>
+            <Button inverse onClick={cancelDeleteHandler}> Cancel</Button>
+            <Button danger onClick={confirmDeleteHandler}> Delete</Button>
+          </React.Fragment>
+        }>
+          <p>Are you sure you want to delete your lovely Holidrink?</p>
+        </Modal>
+
     <li className="event-item">
         <Card className="event-item__content">
         <div className="event-item__image">
@@ -47,7 +78,7 @@ const EventItem = props => {
             {/* openMapHandler > open the map when click on it, reaching the function at the top: "setShowMap(true)"*/}
             <Button to={`/events/${props.id}`}>Edit</Button>
             {/* here the 'id' of that event */}
-            <Button danger>Delete</Button>
+            <Button danger onClick={showDeleteWarningHandler}>Delete</Button>
         </div>
         </Card>
     </li>

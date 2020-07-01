@@ -1,6 +1,8 @@
 import React from 'react';
+
 import Card from '../../shared/components/UIElements/Card';
 import EventItem from './EventItem';
+import Button from '../../shared/components/FormElements/Button';
 
 import './EventList.css'
 
@@ -11,7 +13,7 @@ const EventList = props => {
       <div className="event-list center">
         <Card>
             <h2>You have no Holidrinks yet.Let's plan some!</h2>
-            <button>Plan a Holidrink</button>
+            <Button to="/events/new">Plan a Holidrink</Button>
         </Card>
       </div>
       );
@@ -20,7 +22,7 @@ const EventList = props => {
   <ul className="event-list">
       {props.items.map(event =>( 
       <EventItem 
-        Key={event.id} 
+        key={event.id} 
         id={event.id} 
         image={event.imageUrl}
         description={event.description} 
