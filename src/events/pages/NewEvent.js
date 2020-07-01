@@ -1,4 +1,4 @@
-import React, {useCallBack , useReducer} from 'react';
+import React, {useCallback , useReducer} from 'react';
 // If I setup two useState hooks & declare two functions to handle state changes when I invoke a function and re-render happens, a new instance of both of these functions will be created. The instance of the other function will also be created. So with several function  many instance will be created during each re-render and will causes performance issues like infinity loop. seCallback helps stop that. It will cache/memoized function we pass into it and stop a new instance to be created for the other function.
 import Input from '../../shared/components/FormElements/Input';
 import Button from '../../shared/components/FormElements/Button';
@@ -48,7 +48,7 @@ const NewEvent = () => {
     isValid: false
   });// this is the initial state that needs  to be update in the reducer
 
-  const inputHandler = useCallBack((id,value,isValid) => {
+  const inputHandler = useCallback((id,value,isValid) => {
   //this function will received the id of the input that changed, value and answer whether it's valid or not
   dispatch({
     type: 'INPUT_CHANGE',
@@ -64,7 +64,7 @@ const NewEvent = () => {
 };
 
   return (
-    <form className="place-form" onSubmit={placeSubmitHandler}>
+    <form className="event-form" onSubmit={placeSubmitHandler}>
       <Input
         id="title"
         element="input"
