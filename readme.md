@@ -72,12 +72,11 @@ localisation : {type: String, required: true},
 
 ## Links
 Trello
-[GitHub]( )
+[https://trello.com/invite/b/QWZaYoB3/7f371369f53fee93e146420165313c92/holidrinks]
 
-Git
-Repository Link
-[GitHub] ( )
+Git / Repository Link
+[https://github.com/aurorecr/holidrinks]
 
 Deploy Link
- 
+[] 
 

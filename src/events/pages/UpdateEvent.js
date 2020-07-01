@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 // import { useParams } from 'react-router-dom';
+// to avoid infinit loop in "setFormData" because it will set a new form instead of updating, I use "useEffect" hook to wrap the call  setFormData inside
 import { withRouter } from "react-router";
 
 import Input from '../../shared/components/FormElements/Input';
@@ -22,7 +23,7 @@ const EX_EVENTS = [
             lat:-36.853539,
             lng:174.762792,
         },
-        creator:'Julia'
+        creator:'u1'
     },
     {
         id:'p2',
@@ -38,8 +39,8 @@ const EX_EVENTS = [
     },
 ];
 
-  const UpdateEvent = (props) => {
-  console.log(props,'props ?')
+const UpdateEvent = (props) => {
+  const [isLoading, setIsLoading] = useState(true);
 
   const eventId=props.match.params.eventsId
 
@@ -51,18 +52,40 @@ const EX_EVENTS = [
     
   });
   
-  const [formState, inputHandler] = useForm({
+  const [formState, inputHandler, setFormData] = useForm({
+    title:{
+      value: '',
+      isValid : false
+    },
+    description:{
+      value: '',
+      isValid : false
+    },
+    //set like that later when we connect to the backend it will show a loadinf spinner while the user is waiting for the place to load
+  },false)
+  
+  useEffect(() =>{
+    // so inside I put my function setFormData as useEffect will stop the loop
+  setFormData({
     title:{
       value: identifiedEvent.title,
       isValid : true
     },
     description:{
-      value: identifiedEvent.description,
+      value: identifiedEvent.title,
       isValid : true
     },
-  },true)
-  
+  },true
+  );
+  setIsLoading(false);
+  //once we set the form data it's not loading anymore
+},[setFormData, identifiedEvent]);
 
+  
+  const eventUpdateSubmitHandler = event => {
+    event.preventDefault();
+    console.log(formState.inputs);
+  };
   if (!identifiedEvent) {
     return (
       <div className="center">
@@ -71,8 +94,15 @@ const EX_EVENTS = [
     );
   }
 
+  if (isLoading) {
+    return (
+      <div className="center">
+        <h2>Loading...</h2>
+      </div>
+    );
+  }
   return (
-    <form className="event-form">
+     <form className="event-form" onSubmit={eventUpdateSubmitHandler}>
       <Input
         id="title"
         element="input"

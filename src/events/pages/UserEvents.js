@@ -14,7 +14,7 @@ const example_events =[
         lat:-36.853539,
         lng:174.762792,
     },
-    creator:'Julia'
+    creator:'u1'
 },
 {
     id:'p2',

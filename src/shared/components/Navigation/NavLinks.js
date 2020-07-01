@@ -10,7 +10,7 @@ return <ul className="nav-links">
         <NavLink to="/" exact>Find Holidrinks</NavLink>
     </li>
     <li>
-        <NavLink to="/Julia/events">Modify my Holidrinks</NavLink>
+        <NavLink to="/u1/events">Modify my Holidrinks</NavLink>
     </li>
     <li>
         <NavLink to="/events/new">Create a Holidrinks</NavLink>

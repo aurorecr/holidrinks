@@ -12,12 +12,12 @@
   text-decoration: none;
   padding: 1rem;
   color: white;
-  background-image: linear-gradient(to right top, #bfe7f8 0%, #3498db 100%);
+  background-color: rgba(88,112,46,0.8);
 }
 
 .user-item a:hover,
 .user-item a:active {
-  background: #bfe7f8;
+  background-color: rgba(88, 112, 46, 0.582);
 }
 
 .user-item__content {
