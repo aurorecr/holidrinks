@@ -69,6 +69,7 @@ const Auth = () => {
 
   return (
     <Card className="authentication">
+      <p className="intro" >Make friends in Holiday around drinks to share your adventure! </p>
       <h2>Login to your account</h2>
       <hr />
       <form onSubmit={authSubmitHandler}>
