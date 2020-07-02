@@ -51,8 +51,6 @@ const App = () => {
   } else {
     routes = (
       <Switch>
-
-
         <Route path="/auth">
           <Auth/> 
         </Route>

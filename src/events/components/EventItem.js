@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState,useContext } from 'react';
 
 import Modal from '../../shared/components/UIElements/Modal';
 import Button from '../../shared/components/FormElements/Button'
 import Card from '../../shared/components/UIElements/Card';
 import Map from '../../shared/components/UIElements/Map';
+import {AuthContext} from '../../shared/context/auth-context';
 
 import './EventItem.css'
 
 const EventItem = props => {
+    const auth = useContext(AuthContext);
+   //it will controle the buttons delete and cancel
+  
     const [showMap, setShowMap] = useState(false);
     //showMap is initialy false so we don't show the model yet
 
@@ -76,9 +80,11 @@ const EventItem = props => {
         <div className="event-item__actions">
             <Button inverse onClick={openMapHandler}>View on map</Button>
             {/* openMapHandler > open the map when click on it, reaching the function at the top: "setShowMap(true)"*/}
-            <Button to={`/events/${props.id}`}>Edit</Button>
+            
+            {auth.isLoggedIn && <Button to={`/events/${props.id}`}>Edit</Button>}
             {/* here the 'id' of that event */}
-            <Button danger onClick={showDeleteWarningHandler}>Delete</Button>
+            {/* only if the user is connected we can see Edit and Delete Button, so  if auth is true */}
+            {auth.isLoggedIn && <Button danger onClick={showDeleteWarningHandler}>Delete</Button>}
         </div>
         </Card>
     </li>
