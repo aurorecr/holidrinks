@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useCallback} from 'react';
 import {BrowserRouter as Router, Route, Redirect, Switch} from 'react-router-dom';
 
 import Users from './users/pages/Users';
@@ -7,9 +7,23 @@ import UserEvents from './events/pages/UserEvents';
 import UpdateEvent from './events/pages/UpdateEvent';
 import Auth from './users/pages/Auth';
 import MainNavigation from './shared/components/Navigation/MainNavigation';
+import {AuthContext} from './shared/context/auth-context';
 
 const App = () => { 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const login = useCallback(() => {
+    //useCallback to avoid infinity loops
+    setIsLoggedIn(true);
+  }, []);
+
+  const logout = useCallback(() => {
+    //useCallback to avoid infinity loops
+    setIsLoggedIn(false);
+  }, []);
+
   return (
+<AuthContext.Provider value={{isLoggedIn: isLoggedIn, login: login, logout:logout}}>
   <Router>
    {/* <Title/> */}
    <MainNavigation/>{/* before the switch as I want to show this nav bar doesn't matter which URL is called for other componants */}
@@ -35,7 +49,7 @@ const App = () => {
     </Switch>
     </main>
   </Router>
-  
+  </AuthContext.Provider>
   )
 };
 
