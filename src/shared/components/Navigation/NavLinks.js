@@ -25,9 +25,9 @@ return <ul className="nav-links">
         <NavLink to="/events/new">Create a Holidrinks</NavLink>
     </li>
     )}
-    {!auth.isLoggedIn &&(
+    {auth.isLoggedIn &&(
     <li>
-        <NavLink to="/auth">Sign In</NavLink>
+        <NavLink to="/auth">Log out</NavLink>
     </li>
     )}
 </ul>
