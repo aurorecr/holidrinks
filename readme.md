@@ -62,11 +62,15 @@ description : {type: String, required: true, unique: true},
 
 Event 
 {
-image :{type: String, required: true, unique: true},
-owner id :{objectmodel } {type: String, required: true},
-address :{type: String, required: true},
-description :{type: String, required: true},
-localisation : {type: String, required: true},
+   organised by: { type: String, required: true },
+   description: { type: String, required: true },
+   image: { type: String, required: true },
+   address: { type: String, required: true },
+  location: {
+     lat: { type: Number, required: true },
+      lng: { type: Number, required: true },
+    },
+    creator: { type: String, required: true }
 }
 
 
