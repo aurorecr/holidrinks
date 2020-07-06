@@ -24,11 +24,13 @@ const EventList = props => {
       <EventItem 
         key={event.id} 
         id={event.id} 
-        image={event.imageUrl}
+        image={event.image}
         description={event.description} 
         address={event.address} 
         creatorId={event.creator} 
-        coordinates={event.location}/>
+        coordinates={event.location}
+        onDelete={props.onDeleteEvent}
+        />
         ))}
       {/* map to go through each event and load them here */}
   </ul>)

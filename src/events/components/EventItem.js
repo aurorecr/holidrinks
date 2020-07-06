@@ -1,14 +1,23 @@
 import React, { useState,useContext } from 'react';
 
+// import ErrorModal from '../../shared/components/UIElements/ErrorModal';
+// import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
+// import { useHttpClient } from '../../shared/hooks/form.hook';
 import Modal from '../../shared/components/UIElements/Modal';
 import Button from '../../shared/components/FormElements/Button'
 import Card from '../../shared/components/UIElements/Card';
 import Map from '../../shared/components/UIElements/Map';
 import {AuthContext} from '../../shared/context/auth-context';
+import { useHttpClient } from '../../shared/hooks/http-hook';
+import ErrorModal from '../../shared/components/UIElements/ErrorModal';
+import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
+
 
 import './EventItem.css'
 
 const EventItem = props => {
+  const { isLoading, error, sendRequest, clearError } = useHttpClient();
+
     const auth = useContext(AuthContext);
    //it will controle the buttons delete and cancel
   
@@ -30,15 +39,22 @@ const EventItem = props => {
       setShowConfirmModal(false);
     };
 
-    const confirmDeleteHandler = () => {
+    const confirmDeleteHandler = async () => {
       setShowConfirmModal(false);
-        console.log('DELETING');
+      try {
+        await sendRequest(
+          `http://localhost:5000/api/events/${props.id}`,
+          'DELETE'
+        );
+        props.onDelete(props.id);
+      } catch (err) {}
     };
-
+  
 
     return (
     <React.Fragment>
     {/* it won't  be rendered there, the portal both on the backdrop and modal overlay all to inject in a different place in the index.html file  */}
+    <ErrorModal error={error} onClear={clearError} />
         <Modal
           show={showMap}
           onCancel={closeMapHandler}
@@ -69,11 +85,12 @@ const EventItem = props => {
 
     <li className="event-item">
         <Card className="event-item__content">
+        {isLoading && <LoadingSpinner asOverlay />}
         <div className="event-item__image">
             <img src={props.image} alt={props.title}/>
         </div>
         <div>
-            <h2>Organised by {props.creatorId}</h2>
+            <h2>{props.title}</h2>
             <h3>{props.address}</h3>
             <p>{props.description}</p>
         </div>
@@ -81,10 +98,11 @@ const EventItem = props => {
             <Button inverse onClick={openMapHandler}>View on map</Button>
             {/* openMapHandler > open the map when click on it, reaching the function at the top: "setShowMap(true)"*/}
             
-            {auth.isLoggedIn && <Button to={`/events/${props.id}`}>Edit</Button>}
+            {auth.isLoggedIn &&(
+             <Button to={`/events/${props.id}`}>Edit</Button>)}
             {/* here the 'id' of that event */}
             {/* only if the user is connected we can see Edit and Delete Button, so  if auth is true */}
-            {auth.isLoggedIn && <Button danger onClick={showDeleteWarningHandler}>Delete</Button>}
+            {auth.isLoggedIn && (<Button danger onClick={showDeleteWarningHandler}>Delete</Button>)}
         </div>
         </Card>
     </li>

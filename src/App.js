@@ -11,15 +11,19 @@ import {AuthContext} from './shared/context/auth-context';
 
 const App = () => { 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  const login = useCallback(() => {
+  const [userId, setUserId] = useState(false);
+  
+  const login = useCallback((uid) => {
     //useCallback to avoid infinity loops
     setIsLoggedIn(true);
+    setUserId(uid);
   }, []);
 
   const logout = useCallback(() => {
     //useCallback to avoid infinity loops
     setIsLoggedIn(false);
+    setUserId(null);
+
   }, []);
 
   let routes;
@@ -62,7 +66,12 @@ const App = () => {
   }
 
   return (
-    <AuthContext.Provider value={{isLoggedIn: isLoggedIn, login: login, logout:logout}}>
+    <AuthContext.Provider 
+    value={{
+      isLoggedIn: isLoggedIn, 
+      userId:userId,
+      login: login, 
+      logout:logout}}>
       <Router>
       {/* <Title/> */}
           <MainNavigation/>{/* before the switch as I want to show this nav bar doesn't matter which URL is called for other componants */}
