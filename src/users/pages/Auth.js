@@ -126,7 +126,11 @@ console.log(formState.inputs);
               onInput={inputHandler}
             />
           )}
-          {!isLoginMode && <ImageUpload center id="image" onInput={inputHandler}/>}
+          {!isLoginMode &&
+           <ImageUpload 
+           center id="image" 
+           onInput={inputHandler}
+            errorText="You will need an image here"/>}
           <Input
             element="input"
             id="email"
