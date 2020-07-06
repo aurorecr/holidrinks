@@ -44,7 +44,11 @@ const EventItem = props => {
       try {
         await sendRequest(
           `http://localhost:5000/api/events/${props.id}`,
-          'DELETE'
+          'DELETE',
+        null,
+        {
+          Authorization: 'Bearer' + auth.token
+        }
         );
         props.onDelete(props.id);
       } catch (err) {}
