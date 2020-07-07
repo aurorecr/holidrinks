@@ -18,33 +18,6 @@ import { AuthContext } from '../../shared/context/auth-context';
 
 import './EventForm.css';
 
-// const EX_EVENTS = [
-//     {
-//         id:'p1',
-//         title:'Basement Theatre',
-//         description: 'Here since 2 days, mood to visit a bit the city white other buddies',
-//         imageUrl:'https://bit.ly/3ikLMau',
-//         address:'Lower Greys Avenue,Auckland, New Zealand',
-//         location:{
-//             lat:-36.853539,
-//             lng:174.762792,
-//         },
-//         creator:'u1'
-//     },
-//     {
-//         id:'p2',
-//         title:'The Glass Goose',
-//         description: 'Want to form a groupe for Hiking',
-//         imageUrl:'https://bit.ly/38ddKA0',
-//         address:'28 Federal Street, Auckland,New Zealand',
-//         location:{
-//             lat:-36.848613,
-//             lng:174.7627371,
-//         },
-//         creator:'u2'
-//     },
-// ];
-
 const UpdateEvent = () => {
   const auth = useContext(AuthContext);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
@@ -73,7 +46,7 @@ const UpdateEvent = () => {
     const fetchEvent = async () => {
       try {
         const responseData = await sendRequest(
-          `http://localhost:5000/api/events/${eventId}`
+          `${process.env.REACT_APP_BACKEND_URL}/events/${eventId}`
         );
         setLoadedEvent(responseData.event);
         setFormData(
@@ -100,7 +73,7 @@ const UpdateEvent = () => {
     event.preventDefault();
     try {
       await sendRequest(
-        `http://localhost:5000/api/events/${eventId}`,
+        `${process.env.REACT_APP_BACKEND_URL}/events/${eventId}`,
         'PATCH',
         JSON.stringify({
           title: formState.inputs.title.value,
