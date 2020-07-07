@@ -16,7 +16,7 @@ return(
                 {/* to > define where 'to' wants to go, will reflect the id of the user as it will be the users events creation, it's dynamic, so we use curly braces */}
                 {/* so {props.id} here is the user id */}
                     <div className="user-image">
-                    <Avatar image={`${process.env.REACT_APP_ASSET_URL}/${props.image}`} alt={props.name} />
+                    <Avatar image={`${process.env.REACT_APP_ASSET_URL}${props.image}`} alt={props.name} />
                     </div>
                     <div className="user-item__info">
                         <h2>{props.name}</h2>
