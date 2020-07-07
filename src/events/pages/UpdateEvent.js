@@ -108,7 +108,7 @@ const UpdateEvent = () => {
         }),
         {
           'Content-Type': 'application/json',
-          Authorization: 'Bearer' + auth.token,
+          Authorization: 'Bearer ' + auth.token,
         }
       );
       history.push('/' + auth.userId + '/events');

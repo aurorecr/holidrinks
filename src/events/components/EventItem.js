@@ -44,7 +44,7 @@ const EventItem = props => {
           'DELETE',
         null,
         {
-          Authorization: 'Bearer' + auth.token
+          Authorization: 'Bearer ' + auth.token
         }
         );
         props.onDelete(props.id);

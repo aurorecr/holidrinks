@@ -32,7 +32,7 @@ const App = () => {
           <NewEvent/> 
         </Route>
 
-        <Route path="/events/:eventsId">
+        <Route path="/events/:eventId">
         {/* this has to be place after event/new, the order matters here,as it need to enter in event/new before. */}
           <UpdateEvent /> 
       </Route>
