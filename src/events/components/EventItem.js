@@ -1,8 +1,5 @@
 import React, { useState,useContext } from 'react';
 
-// import ErrorModal from '../../shared/components/UIElements/ErrorModal';
-// import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
-// import { useHttpClient } from '../../shared/hooks/form.hook';
 import Modal from '../../shared/components/UIElements/Modal';
 import Button from '../../shared/components/FormElements/Button'
 import Card from '../../shared/components/UIElements/Card';
@@ -93,7 +90,7 @@ const EventItem = props => {
         <div className="event-item__image">
             <img src={`http://localhost:5000/${props.image}`} alt={props.title}/>
         </div>
-        <div>
+        <div className="place-item__info">
             <h2>{props.title}</h2>
             <h3>{props.address}</h3>
             <p>{props.description}</p>
@@ -102,16 +99,20 @@ const EventItem = props => {
             <Button inverse onClick={openMapHandler}>View on map</Button>
             {/* openMapHandler > open the map when click on it, reaching the function at the top: "setShowMap(true)"*/}
             
-            {auth.isLoggedIn &&(
-             <Button to={`/events/${props.id}`}>Edit</Button>)}
-            {/* here the 'id' of that event */}
-            {/* only if the user is connected we can see Edit and Delete Button, so  if auth is true */}
-            {auth.isLoggedIn && (<Button danger onClick={showDeleteWarningHandler}>Delete</Button>)}
-        </div>
+            {auth.userId === props.creatorId && (
+              <Button to={`/events/${props.id}`}>EDIT</Button>
+            )}
+
+            {auth.userId === props.creatorId && (
+              <Button danger onClick={showDeleteWarningHandler}>
+                Delete
+              </Button>
+            )}
+          </div>
         </Card>
-    </li>
+      </li>
     </React.Fragment>
-    );
+  );
 };
 
 export default EventItem;

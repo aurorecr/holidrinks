@@ -12,7 +12,7 @@ import {
   VALIDATOR_REQUIRE,
   VALIDATOR_MINLENGTH
 } from '../../shared/components/util/validators';
-import { useForm } from '../../shared/hooks/form.hook';
+import { useForm } from '../../shared/hooks/form-hook';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import { AuthContext } from '../../shared/context/auth-context';
 
@@ -107,8 +107,8 @@ const UpdateEvent = () => {
           description: formState.inputs.description.value
         }),
         {
-          'Content-Type': 'application/json'
-          Authorization:'Bearer' + auth.token
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer' + auth.token,
         }
       );
       history.push('/' + auth.userId + '/events');

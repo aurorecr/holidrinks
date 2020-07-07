@@ -1,4 +1,4 @@
-import React, {useState, useCallback} from 'react';
+import React from 'react';
 import {BrowserRouter as Router, Route, Redirect, Switch} from 'react-router-dom';
 
 import Users from './users/pages/Users';
@@ -8,23 +8,11 @@ import UpdateEvent from './events/pages/UpdateEvent';
 import Auth from './users/pages/Auth';
 import MainNavigation from './shared/components/Navigation/MainNavigation';
 import {AuthContext} from './shared/context/auth-context';
+import { useAuth } from './shared/hooks/auth-hook';
 
 const App = () => { 
-  const [token, setToken] = useState(false);
-  const [userId, setUserId] = useState(false);
-  
-  const login = useCallback((uid, token) => {
-    //useCallback to avoid infinity loops
-    setToken(token);
-    setUserId(uid);
-  }, []);
 
-  const logout = useCallback(() => {
-    //useCallback to avoid infinity loops
-    setToken(null);
-    setUserId(null);
-
-  }, []);
+  const { token, login, logout, userId } = useAuth();
 
   let routes;
 

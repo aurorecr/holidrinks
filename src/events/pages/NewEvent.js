@@ -12,7 +12,7 @@ import {
   VALIDATOR_REQUIRE,
   VALIDATOR_MINLENGTH
 } from '../../shared/components/util/validators';
-import { useForm } from '../../shared/hooks/form.hook';
+import { useForm } from '../../shared/hooks/form-hook';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import { AuthContext } from '../../shared/context/auth-context';
 
@@ -52,7 +52,6 @@ const NewEvent = () => {
       formData.append('title', formState.inputs.title.value);
       formData.append('description', formState.inputs.description.value);
       formData.append('address', formState.inputs.address.value);
-      formData.append('creator', auth.userId);
       formData.append('image', formState.inputs.image.value);
 
       await sendRequest(

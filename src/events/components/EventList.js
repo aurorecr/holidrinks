@@ -25,6 +25,7 @@ const EventList = props => {
         key={event.id} 
         id={event.id} 
         image={event.image}
+        title={event.title}
         description={event.description} 
         address={event.address} 
         creatorId={event.creator} 
@@ -33,7 +34,8 @@ const EventList = props => {
         />
         ))}
       {/* map to go through each event and load them here */}
-  </ul>)
+  </ul>
+  );
 };
 
 export default EventList;
