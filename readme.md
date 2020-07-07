@@ -82,5 +82,5 @@ Git / Repository Link
 [https://github.com/aurorecr/holidrinks]
 
 Deploy Link
-[https://holidrinks.herokuapp.com/] 
+[https://mystifying-heisenberg-342295.netlify.app/auth] 
 
